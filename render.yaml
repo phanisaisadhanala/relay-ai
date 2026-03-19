@@ -1,0 +1,31 @@
+services:
+  # ── Backend (FastAPI) ──────────────────────────────────────
+  - type: web
+    name: relay-ai-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false          # You set this manually in Render dashboard
+      - key: MODEL
+        value: openai/gpt-4o-mini
+      - key: OPENAI_BASE_URL
+        value: https://openrouter.ai/api/v1
+    plan: free
+
+  # ── Frontend (Vite React) ──────────────────────────────────
+  - type: web
+    name: relay-ai-frontend
+    runtime: node
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    plan: free
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          name: relay-ai-backend
+          type: web
+          property: host
