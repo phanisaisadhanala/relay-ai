@@ -8,11 +8,13 @@ services:
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: OPENAI_API_KEY
-        sync: false          # You set this manually in Render dashboard
+        sync: false
       - key: MODEL
         value: openai/gpt-4o-mini
       - key: OPENAI_BASE_URL
         value: https://openrouter.ai/api/v1
+      - key: PYTHON_VERSION
+        value: 3.11.9
     plan: free
 
   # ── Frontend (Vite React) ──────────────────────────────────
@@ -24,8 +26,5 @@ services:
     staticPublishPath: dist
     plan: free
     envVars:
-      - key: REACT_APP_API_URL
-        fromService:
-          name: relay-ai-backend
-          type: web
-          property: host
+      - key: VITE_API_URL
+        sync: false

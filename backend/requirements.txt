@@ -1,27 +1,37 @@
 # ── Core ─────────────────────────────────────────────────────
-fastapi==0.111.0
-uvicorn[standard]==0.29.0
-python-multipart==0.0.9
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.12
 python-dotenv==1.0.1
-pydantic==2.7.1
+pydantic==2.9.2
 
 # ── OpenAI ────────────────────────────────────────────────────
-openai==1.30.1
+openai==1.51.0
 
 # ── LangChain + RAG ───────────────────────────────────────────
-langchain==0.2.1
-langchain-openai==0.1.8
-langchain-community==0.2.1
-langchain-chroma==0.1.1
-langchain-text-splitters==0.2.1
+langchain==0.3.1
+langchain-openai==0.2.1
+langchain-community==0.3.1
+langchain-chroma==1.0.0
+langchain-text-splitters==0.3.0
 
 # ── Vector DB ────────────────────────────────────────────────
-chromadb==0.5.0
+chromadb==0.5.18
 
 # ── PDF parsing ──────────────────────────────────────────────
-pypdf==4.2.0
-langchain-text-splitters==0.2.1
+pypdf==4.3.1
 
 # ── Utilities ────────────────────────────────────────────────
-httpx==0.27.0
-aiofiles==23.2.1
+httpx==0.27.2
+aiofiles==24.1.0
+```
+
+---
+
+## File 2 — CREATE `backend/.python-version`
+
+In your `backend/` folder, **create a new file** called exactly `.python-version` (starts with a dot, no extension).
+
+Put only this one line inside it:
+```
+3.11.9
