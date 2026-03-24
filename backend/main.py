@@ -378,7 +378,7 @@ async def chat(req: ChatRequest):
                     messages=messages,
                     stream=True,
                     temperature=0.1,   # lower = more faithful to retrieved content
-                    max_tokens=3000,
+                    max_tokens=1500,
                 )
                 async for chunk in stream:
                     delta = chunk.choices[0].delta
@@ -390,7 +390,7 @@ async def chat(req: ChatRequest):
 
     # ── Non-streaming ───────────────────────────────────────
     resp = await async_client.chat.completions.create(
-        model=MODEL, messages=messages, temperature=0.1, max_tokens=3000,
+        model=MODEL, messages=messages, temperature=0.1, max_tokens=1500,
     )
     return {
         "response":      resp.choices[0].message.content,
@@ -422,7 +422,7 @@ async def calculate(req: FaultCalcRequest):
             resp = await async_client.chat.completions.create(
                 model=MODEL,
                 messages=build_messages([Message(role="user", content=ai_prompt)]),
-                temperature=0.1, max_tokens=800,
+                temperature=0.1, max_tokens=500,
             )
             calc["ai_interpretation"] = resp.choices[0].message.content
         except Exception as e:
