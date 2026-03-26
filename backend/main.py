@@ -3,7 +3,7 @@ main.py — Relay Protection AI Agent
 FastAPI + OpenRouter (chat) + OpenAI (embeddings) + ChromaDB RAG
 """
 
-import os, math
+import os, math,cmath
 from typing import List, Optional, AsyncGenerator
 from contextlib import asynccontextmanager
 
@@ -132,7 +132,7 @@ def to_complex(mag: float, ang_deg: float) -> complex:
     )
 
 def fmt_z(z: complex) -> str:
-    return f"{abs(z):.4f}{chr(8736)}{math.degrees(math.phase(z)):.2f} Ohm"
+    return f"{abs(z):.4f}{chr(8736)}{math.degrees(cmath.phase(z)):.2f} Ohm"
 
 def run_fault_calc(req: FaultCalcRequest) -> dict:
     V_LN = (req.voltage_kv * 1000) / math.sqrt(3)
@@ -212,7 +212,7 @@ def run_fault_calc(req: FaultCalcRequest) -> dict:
 
     return {
         "fault_type": ft, "voltage_kv": req.voltage_kv,
-        "ia_pu": round(abs(Ia), 5), "ia_angle_deg": round(math.degrees(math.phase(Ia)), 2),
+        "ia_pu": round(abs(Ia), 5), "ia_angle_deg": round(math.degrees(cmath.phase(Ia)), 2),
         "ia_primary_A": round(Ia_A, 2),
         "ia1_pu": f"{abs(Ia1):.5f}", "ia2_pu": f"{abs(Ia2):.5f}", "ia0_pu": f"{abs(Ia0):.5f}",
         "impedances": {"Z1": fmt_z(Z1), "Z2": fmt_z(Z2), "Z0": fmt_z(Z0), "Zf": fmt_z(Zf)},
