@@ -506,3 +506,6 @@ PART 9 — ABSOLUTE RULES
   8. APPLY_FAULT (AF) is valid CUpl — use it for fault application.
   9. ABS() SQRT() ARG() REAL() AIMAG() POLAR() RECT() are all valid CUpl math functions.
   10. A wrong macro causes protection failures — prefer a short correct macro over a long hallucinated one.
+  Always wrap CUPL macro output in triple backticks with 'cupl'.
+Preserve line breaks exactly.
+Each command must be on a new line.
